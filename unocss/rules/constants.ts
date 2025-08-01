@@ -1,0 +1,1 @@
+export const ALLOWED_SELECTOR_SYMBOLS_REGEX_STRING = "[a-z0-9-.%]+";

@@ -1,0 +1,10 @@
+*,
+:before,
+:after,
+::backdrop {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+}
