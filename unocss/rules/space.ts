@@ -9,10 +9,12 @@ const allowedSpaceValues = [
 
 export const space: DynamicRule = [
   new RegExp(
-    `^(padding|margin)(-inline|-block)?(-start|-end)?-(${allowedSpaceValues})$`
+    `^(padding|margin)-?(inline|block)?-?(start|end)?-(${allowedSpaceValues})$`
   ),
   (marchArray) =>
     createRule(marchArray, ({ rawValue }) =>
-      rawValue === "auto" ? "auto" : `var(--spacing-${rawValue})`
+      rawValue === "auto" || rawValue === "0"
+        ? rawValue
+        : `var(--spacing-${rawValue})`
     ),
 ];

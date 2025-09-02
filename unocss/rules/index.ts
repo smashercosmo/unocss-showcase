@@ -9,3 +9,5 @@ export { inset } from "./inset";
 export { gap } from "./gap";
 export { position } from "./position";
 export { flex } from "./flex";
+export { direction } from "./direction";
+export { overflow } from "./overflow";

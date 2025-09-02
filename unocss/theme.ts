@@ -1,12 +1,17 @@
 import { type PresetUnoTheme } from "unocss";
 
+/**
+ * Currently, these theme values are not in use (except for breakpoints),
+ * but in the future it's going to be the main source of truth. Even CSS variables
+ * are going to be generated from the theme object.
+ */
 export const theme = {
   breakpoints: {
-    sm: "640px",
-    md: "768px",
-    lg: "1024px",
-    xl: "1280px",
-    xxl: "1536px",
+    sm: "40em",
+    md: "48em",
+    lg: "64em",
+    xl: "80em",
+    xxl: "96em",
   },
   colors: {
     disabled: "#909090",
@@ -48,30 +53,34 @@ export const theme = {
     current: "currentColor",
     transparent: "transparent",
     divider: "#eeeeee",
-  },
+  } as const,
   spacing: {
-    "2xs": "0.125rem",
-    xs: "0.25rem",
-    sm: "0.5rem",
-    md: "0.75rem",
-    lg: "1rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-    "3xl": "2rem",
-    "4xl": "2.5rem",
-    "5xl": "5rem",
+    "2xs": "0.125rem" /* 2px */,
+    xs: "0.25rem" /* 4px */,
+    sm: "0.5rem" /* 8px */,
+    md: "0.75rem" /* 12px */,
+    lg: "1rem" /* 16px */,
+    xl: "1.25rem" /* 20px */,
+    "2xl": "1.5rem" /* 24px */,
+    "3xl": "2rem" /* 32px */,
+    "4xl": "2.5rem" /* 40px */,
+    "5xl": "3.75rem" /* 60px */,
+    "6xl": "5rem" /* 80px */,
   },
   borderRadius: {
-    xs: "0.125rem",
-    sm: "0.25rem",
-    md: "0.5rem",
+    xs: "0.125rem" /* 2px */,
+    sm: "0.25rem" /* 4px */,
+    md: "0.5rem" /* 8px */,
     full: "50%",
   },
 } satisfies PresetUnoTheme;
 
-const colorValues = Object.keys(theme.colors) as  ColorValue[];
-const spacingValues = Object.keys(theme.spacing) as SpacingValue[];
-const borderRadiusValues = Object.keys(theme.borderRadius) as BorderRadiusValue[];
+const colorValues = Object.keys(theme.colors) as ColorValue[];
+const spacingValues = (Object.keys(theme.spacing) as SpacingValue[]).concat(0);
+const borderRadiusValues = Object.keys(
+  theme.borderRadius
+) as BorderRadiusValue[];
+
 const displayValues = [
   "none",
   "inline",
@@ -91,16 +100,21 @@ const justifyContentValues = [
   "space-between",
 ] as const;
 const positionValues = ["relative", "absolute", "fixed", "sticky"] as const;
-const flexValues = ["none", 1] as const;
+const flexValues = ["none"] as const;
+const directionValues = ["row", "column"] as const;
+const overflowValues = ["auto", "hidden", "visible", "clip"] as const;
 
 export type ColorValue = keyof typeof theme.colors;
-export type SpacingValue = keyof typeof theme.spacing;
+export type SpacingValue = keyof typeof theme.spacing | 0;
 export type BorderRadiusValue = keyof typeof theme.borderRadius;
 export type DisplayValue = (typeof displayValues)[number];
 export type PositionValue = (typeof positionValues)[number];
 export type AlignItemsValue = (typeof alignItemsValues)[number];
 export type JustifyContentValue = (typeof justifyContentValues)[number];
-export type MarginValue = SpacingValue | "auto";
+export type FlexValue = (typeof flexValues)[number];
+export type DirectionValue = (typeof directionValues)[number];
+export type OverflowValue = (typeof overflowValues)[number];
+export type MarginValue = SpacingValue | "auto" | 0;
 
 export const values = {
   display: displayValues,
@@ -112,5 +126,7 @@ export const values = {
   gap: spacingValues,
   "border-radius": borderRadiusValues,
   flex: flexValues,
+  direction: directionValues,
   color: colorValues,
+  overflow: overflowValues,
 } as const;

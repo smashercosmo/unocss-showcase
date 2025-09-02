@@ -1,4 +1,6 @@
-import { forwardRef, type ForwardedRef, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { clsx } from "clsx";
+import { CCS_VALUE_SPLITTER_REGEX } from "../../../unocss/utils/constants";
 
 import {
   type AlignItems,
@@ -7,9 +9,10 @@ import {
   type Colors,
   type Display,
   type Flex,
-  type Gap,
+  type Grid,
   type JustifyContent,
   type Margin,
+  type Overflow,
   type Padding,
   type Position,
   type ResponsiveProperties,
@@ -17,20 +20,20 @@ import {
 } from "./Box.types";
 
 type Props = {
-  id?: string;
   children?: ReactNode;
-} & Colors &
-  Display &
-  BorderRadius &
-  AlignItems &
-  JustifyContent &
-  BorderWidth &
+} & ResponsiveProperties<Display> &
+  ResponsiveProperties<AlignItems> &
+  ResponsiveProperties<JustifyContent> &
+  ResponsiveProperties<Colors> &
+  ResponsiveProperties<BorderWidth> &
+  ResponsiveProperties<BorderRadius> &
   ResponsiveProperties<Margin> &
   ResponsiveProperties<Padding> &
   ResponsiveProperties<Size> &
   ResponsiveProperties<Position> &
+  ResponsiveProperties<Overflow> &
   ResponsiveProperties<Flex> &
-  ResponsiveProperties<Gap>;
+  ResponsiveProperties<Grid>;
 
 function generateClasses(props: Omit<Props, "children">) {
   return Object.entries(props)
@@ -38,16 +41,13 @@ function generateClasses(props: Omit<Props, "children">) {
       ([, value]) => typeof value === "string" || typeof value === "number"
     )
     .map(([key, value]) => {
-      return [key, value].join("-");
-    }).join(" ");
+      return [
+        key,
+        (String(value).match(CCS_VALUE_SPLITTER_REGEX) ?? []).join("-"),
+      ].join("-");
+    });
 }
 
-export const Box = forwardRef(
-  ({ children, id, ...rest }: Props, ref: ForwardedRef<HTMLDivElement>) => {
-    return (
-      <div id={id} className={generateClasses(rest)} ref={ref}>
-        {children}
-      </div>
-    );
-  }
-);
+export function Box({ children, ...rest }: Props) {
+  return <div className={clsx(generateClasses(rest))}>{children}</div>;
+}

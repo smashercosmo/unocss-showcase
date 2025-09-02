@@ -1,14 +1,17 @@
 import { variantBreakpoints } from "@unocss/preset-mini/variants";
 import { defineConfig, presetAttributify } from "unocss";
 
+import { customAttributifyExtractor } from "./unocss/customAttributifyExtractor";
 import {
   alignment,
   border,
   color,
+  direction,
   display,
   flex,
   gap,
   inset,
+  overflow,
   position,
   radius,
   size,
@@ -16,9 +19,9 @@ import {
 } from "./unocss/rules";
 import { theme } from "./unocss/theme";
 import { convertAttributeSelectorToClassSelector } from "./unocss/utils/convertAttributeSelectorToClassSelector";
-import { generateCssVariablesFromTheme } from "./unocss/utils/generateCssVariablesFromTheme.ts";
+import { createArbitraryValueRule } from "./unocss/utils/createArbitraryValueRule";
+import {generateCssVariablesFromTheme} from "./unocss/utils/generateCssVariablesFromTheme";
 
-const breakpoints = Object.keys(theme.breakpoints);
 const colors = Object.keys(theme.colors);
 
 function generateColorClasses(props: string[]) {
@@ -31,29 +34,18 @@ function generateColorClasses(props: string[]) {
   return classes;
 }
 
-function generateColorAttributes(props: string[]) {
-  const classes: string[] = [];
-  for (const breakpoint of breakpoints) {
-    for (const prop of props) {
-      classes.push(`${breakpoint}:${prop}`);
-    }
-  }
-  return classes;
-}
+const presets = [
+  {
+    ...presetAttributify(),
+    extractors: [customAttributifyExtractor()],
+  },
+];
 
 export default defineConfig({
   extendTheme() {
     return theme;
   },
-  presets: [
-    presetAttributify({
-      ignoreAttributes: generateColorAttributes([
-        "color",
-        "border-color",
-        "background-color",
-      ]),
-    }),
-  ],
+  presets,
   variants: [variantBreakpoints()],
   rules: [
     flex,
@@ -67,11 +59,17 @@ export default defineConfig({
     border,
     radius,
     display,
+    direction,
+    overflow,
+    createArbitraryValueRule("(grid)-(template)-(columns)"),
+    createArbitraryValueRule("(grid)-(template)-(rows)"),
+    createArbitraryValueRule("(grid)-(column)"),
+    createArbitraryValueRule("(grid)-(row)"),
   ],
   safelist: generateColorClasses(["color", "border-color", "background-color"]),
   postprocess(utilities) {
     utilities.selector = convertAttributeSelectorToClassSelector(
-      utilities.selector,
+      utilities.selector
     );
   },
   extractorDefault: false,

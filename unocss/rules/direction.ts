@@ -3,9 +3,9 @@ import type { DynamicRule } from "unocss";
 import { values } from "../theme";
 import { createRule } from "../utils/createRule";
 
-const allowedFlexValues = values.flex.join("|");
+const allowedDirectionValues = values.direction.join("|");
 
-export const flex: DynamicRule = [
-  new RegExp(`^(flex)-([0-9]+|${allowedFlexValues})$`),
+export const direction: DynamicRule = [
+  new RegExp(`^(flex)-(direction)-(${allowedDirectionValues})$`),
   (marchArray) => createRule(marchArray, ({ rawValue }) => rawValue),
 ];

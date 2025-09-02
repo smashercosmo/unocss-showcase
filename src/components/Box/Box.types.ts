@@ -2,16 +2,19 @@ import {
   type AlignItemsValue,
   type BorderRadiusValue,
   type ColorValue,
+  type DirectionValue,
   type DisplayValue,
+  type FlexValue,
   type JustifyContentValue,
   type MarginValue,
+  type OverflowValue,
   type PositionValue,
   type SpacingValue,
   type theme,
 } from "../../../unocss/theme";
 
 type Breakpoints = keyof typeof theme.breakpoints;
-type ArbitrarySpacing = `${number}rem` | `${number}%` | number;
+type ArbitrarySpacing = `${number}rem` | `${number}%` | `${number}vw` | number;
 
 type PrefixedProperties<T, Prefixes extends string> = {
   [K in keyof T]: T[K];
@@ -62,11 +65,25 @@ export type Position = {
 };
 
 export type Flex = {
-  flex?: number | "none";
+  flex?: number | FlexValue;
+  "flex-direction"?: DirectionValue;
+};
+
+export type Grid = {
+  "grid-template-columns"?: string | number;
+  "grid-template-rows"?: string | number;
+  "grid-column"?: string | number;
+  "grid-row"?: string | number;
 };
 
 export type Display = {
   display?: DisplayValue;
+};
+
+export type Overflow = {
+  overflow?: OverflowValue;
+  "overflow-inline"?: OverflowValue;
+  "overflow-block"?: OverflowValue;
 };
 
 export type BorderRadius = {
@@ -97,10 +114,4 @@ export type BorderWidth = {
   "border-block-width"?: ArbitrarySpacing;
   "border-block-start-width"?: ArbitrarySpacing;
   "border-block-end-width"?: ArbitrarySpacing;
-};
-
-export type Gap = {
-  gap?: SpacingValue;
-  "row-gap"?: SpacingValue;
-  "col-gap"?: SpacingValue;
 };
