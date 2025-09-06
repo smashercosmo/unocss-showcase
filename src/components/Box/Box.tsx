@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { forwardRef, type ForwardedRef, type ReactNode } from "react";
 import { clsx } from "clsx";
 import { CCS_VALUE_SPLITTER_REGEX } from "../../../unocss/utils/constants";
 
@@ -21,7 +21,8 @@ import {
 
 type Props = {
   children?: ReactNode;
-} & ResponsiveProperties<Display> &
+} &
+  ResponsiveProperties<Display> &
   ResponsiveProperties<AlignItems> &
   ResponsiveProperties<JustifyContent> &
   ResponsiveProperties<Colors> &
@@ -48,6 +49,16 @@ function generateClasses(props: Omit<Props, "children">) {
     });
 }
 
-export function Box({ children, ...rest }: Props) {
-  return <div className={clsx(generateClasses(rest))}>{children}</div>;
-}
+// eslint-disable-next-line react/display-name
+export const Box = forwardRef(
+  (
+    { children, ...rest }: Props,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    return (
+      <div className={clsx(generateClasses(rest))} ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);

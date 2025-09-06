@@ -1,7 +1,5 @@
-import { toEscapedSelector } from "unocss";
 import { expect, it } from "vitest";
 
-import { convertAttributeSelectorToClassSelector } from "./convertAttributeSelectorToClassSelector";
 import { generateCssVariablesFromTheme } from "./generateCssVariablesFromTheme";
 
 it("should generate css variables from the theme object", () => {
@@ -50,22 +48,4 @@ it("should generate css variables from the theme object", () => {
     }
     }"
   `);
-});
-
-it("should convert attribute selector to class selector", () => {
-  const unEscapedSelector = '[md:block-size~="5.5rem"]';
-  const escapedSelector = toEscapedSelector(unEscapedSelector);
-  const result1 = convertAttributeSelectorToClassSelector(unEscapedSelector);
-  const result2 = convertAttributeSelectorToClassSelector(escapedSelector);
-  expect(result1).toMatchInlineSnapshot('".md\\:block-size-5\\.5rem"');
-  expect(result2).toMatchInlineSnapshot('".md\\:block-size-5\\.5rem"');
-});
-
-it("should not convert class selectors", () => {
-  const unEscapedSelector = ".md:block-size-5.5rem";
-  const escapedSelector = toEscapedSelector(unEscapedSelector);
-  const result1 = convertAttributeSelectorToClassSelector(unEscapedSelector);
-  const result2 = convertAttributeSelectorToClassSelector(escapedSelector);
-  expect(result1).toEqual(unEscapedSelector);
-  expect(result2).toEqual(escapedSelector);
 });

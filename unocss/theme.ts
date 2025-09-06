@@ -75,58 +75,23 @@ export const theme = {
   },
 } satisfies PresetUnoTheme;
 
-const colorValues = Object.keys(theme.colors) as ColorValue[];
-const spacingValues = (Object.keys(theme.spacing) as SpacingValue[]).concat(0);
-const borderRadiusValues = Object.keys(
-  theme.borderRadius
-) as BorderRadiusValue[];
-
-const displayValues = [
-  "none",
-  "inline",
-  "block",
-  "flex",
-  "grid",
-  "inline-block",
-  "inline-flex",
-  "inline-grid",
-  "contents",
-] as const;
-const alignItemsValues = ["start", "end", "center", "baseline"] as const;
-const justifyContentValues = [
-  "start",
-  "end",
-  "center",
-  "space-between",
-] as const;
-const positionValues = ["relative", "absolute", "fixed", "sticky"] as const;
-const flexValues = ["none"] as const;
-const directionValues = ["row", "column"] as const;
-const overflowValues = ["auto", "hidden", "visible", "clip"] as const;
-
 export type ColorValue = keyof typeof theme.colors;
 export type SpacingValue = keyof typeof theme.spacing | 0;
 export type BorderRadiusValue = keyof typeof theme.borderRadius;
-export type DisplayValue = (typeof displayValues)[number];
-export type PositionValue = (typeof positionValues)[number];
-export type AlignItemsValue = (typeof alignItemsValues)[number];
-export type JustifyContentValue = (typeof justifyContentValues)[number];
-export type FlexValue = (typeof flexValues)[number];
-export type DirectionValue = (typeof directionValues)[number];
-export type OverflowValue = (typeof overflowValues)[number];
+export type DisplayValue =
+  | "none"
+  | "inline"
+  | "block"
+  | "flex"
+  | "grid"
+  | "inline-block"
+  | "inline-flex"
+  | "inline-grid"
+  | "contents";
+export type PositionValue = "relative" | "absolute" | "fixed" | "sticky";
+export type AlignItemsValue = "start" | "end" | "center" | "baseline";
+export type JustifyContentValue = "start" | "end" | "center" | "space-between";
+export type FlexValue = "none" | number;
+export type DirectionValue = "row" | "column";
+export type OverflowValue = "auto" | "hidden" | "visible" | "clip";
 export type MarginValue = SpacingValue | "auto" | 0;
-
-export const values = {
-  display: displayValues,
-  "align-items": alignItemsValues,
-  "justify-content": justifyContentValues,
-  padding: spacingValues,
-  margin: ["auto", ...spacingValues],
-  position: positionValues,
-  gap: spacingValues,
-  "border-radius": borderRadiusValues,
-  flex: flexValues,
-  direction: directionValues,
-  color: colorValues,
-  overflow: overflowValues,
-} as const;

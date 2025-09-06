@@ -1,26 +1,13 @@
 import { variantBreakpoints } from "@unocss/preset-mini/variants";
-import { defineConfig, presetAttributify } from "unocss";
+import { defineConfig, toEscapedSelector } from "unocss";
+import { variantAttributify } from "unocss/preset-attributify";
 
-import { customAttributifyExtractor } from "./unocss/customAttributifyExtractor";
-import {
-  alignment,
-  border,
-  color,
-  direction,
-  display,
-  flex,
-  gap,
-  inset,
-  overflow,
-  position,
-  radius,
-  size,
-  space,
-} from "./unocss/rules";
+import { attributifyExtractor } from "./unocss/attributifyExtractor";
 import { theme } from "./unocss/theme";
-import { convertAttributeSelectorToClassSelector } from "./unocss/utils/convertAttributeSelectorToClassSelector";
-import { createArbitraryValueRule } from "./unocss/utils/createArbitraryValueRule";
-import {generateCssVariablesFromTheme} from "./unocss/utils/generateCssVariablesFromTheme";
+import { CCS_VALUE_SPLITTER_REGEX } from "./unocss/utils/constants";
+import { createRules } from "./unocss/utils/createRules";
+import { unescapeCssSelector } from "./unocss/utils/unescapeCssSelector";
+import { generateCssVariablesFromTheme } from "./unocss/utils/generateCssVariablesFromTheme";
 
 const colors = Object.keys(theme.colors);
 
@@ -34,42 +21,103 @@ function generateColorClasses(props: string[]) {
   return classes;
 }
 
-const presets = [
-  {
-    ...presetAttributify(),
-    extractors: [customAttributifyExtractor()],
-  },
-];
+function getMargins(properties: string[]) {
+  return properties.map((property) => ({
+    property,
+    token: "spacing",
+    additionalValues: [0, "auto"],
+  }));
+}
+
+function getPaddings(properties: string[]) {
+  return properties.map((property) => ({
+    property,
+    token: "spacing",
+    additionalValues: [0],
+  }));
+}
 
 export default defineConfig({
   extendTheme() {
     return theme;
   },
-  presets,
-  variants: [variantBreakpoints()],
-  rules: [
-    flex,
-    color,
-    position,
-    gap,
-    size,
-    inset,
-    space,
-    alignment,
-    border,
-    radius,
-    display,
-    direction,
-    overflow,
-    createArbitraryValueRule("(grid)-(template)-(columns)"),
-    createArbitraryValueRule("(grid)-(template)-(rows)"),
-    createArbitraryValueRule("(grid)-(column)"),
-    createArbitraryValueRule("(grid)-(row)"),
-  ],
+  variants: [variantAttributify(), variantBreakpoints()],
+  extractors: [attributifyExtractor()],
+  rules: createRules([
+    { property: "flex", isUnitless: true },
+    { property: "color", token: "colors" },
+    { property: "border-color", token: "colors" },
+    { property: "background-color", token: "colors" },
+    { property: "position" },
+    { property: "gap", token: "spacing" },
+    { property: "row-gap", token: "spacing" },
+    { property: "column-gap", token: "spacing" },
+    { property: "inline-size" },
+    { property: "min-inline-size" },
+    { property: "max-inline-size" },
+    { property: "block-size" },
+    { property: "min-block-size" },
+    { property: "max-block-size" },
+    { property: "inset" },
+    { property: "inset-inline" },
+    { property: "inset-inline-start" },
+    { property: "inset-inline-end" },
+    { property: "inset-block" },
+    { property: "inset-block-start" },
+    { property: "inset-block-end" },
+    ...getMargins([
+      "margin",
+      "margin-inline",
+      "margin-inline-start",
+      "margin-inline-end",
+      "margin-block",
+      "margin-block-start",
+      "margin-block-end",
+    ]),
+    ...getPaddings([
+      "padding",
+      "padding-inline",
+      "padding-inline-start",
+      "padding-inline-end",
+      "padding-block",
+      "padding-block-start",
+      "padding-block-end",
+    ]),
+    { property: "justify-self" },
+    { property: "align-self" },
+    { property: "justify-content" },
+    { property: "align-content" },
+    { property: "align-items" },
+    { property: "border-width" },
+    { property: "border-inline-width" },
+    { property: "border-inline-start-width" },
+    { property: "border-inline-end-width" },
+    { property: "border-block-width" },
+    { property: "border-block-start-width" },
+    { property: "border-block-end-width" },
+    { property: "border-radius", token: "radii" },
+    { property: "border-start-end-radius", token: "radii" },
+    { property: "border-start-start-radius", token: "radii" },
+    { property: "border-end-end-radius", token: "radii" },
+    { property: "border-end-start-radius", token: "radii" },
+    { property: "display" },
+    { property: "flex-direction" },
+    { property: "overflow" },
+    { property: "overflow-block" },
+    { property: "overflow-inline" },
+    { property: "grid-template-columns" },
+    { property: "grid-template-rows" },
+    { property: "grid-column", isUnitless: true },
+    { property: "grid-row", isUnitless: true },
+  ]),
   safelist: generateColorClasses(["color", "border-color", "background-color"]),
   postprocess(utilities) {
-    utilities.selector = convertAttributeSelectorToClassSelector(
-      utilities.selector
+    utilities.selector = toEscapedSelector(
+      (
+        unescapeCssSelector(utilities.selector)
+          .slice(1)
+          .match(CCS_VALUE_SPLITTER_REGEX) ?? []
+      ).join("-")
     );
   },
   extractorDefault: false,

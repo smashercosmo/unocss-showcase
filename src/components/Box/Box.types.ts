@@ -14,7 +14,7 @@ import {
 } from "../../../unocss/theme";
 
 type Breakpoints = keyof typeof theme.breakpoints;
-type ArbitrarySpacing = `${number}rem` | `${number}%` | `${number}vw` | number;
+type ArbitraryValue = string | number;
 
 type PrefixedProperties<T, Prefixes extends string> = {
   [K in keyof T]: T[K];
@@ -45,35 +45,35 @@ export type Padding = {
 };
 
 export type Size = {
-  "inline-size"?: ArbitrarySpacing;
-  "max-inline-size"?: ArbitrarySpacing;
-  "min-inline-size"?: ArbitrarySpacing;
-  "block-size"?: ArbitrarySpacing;
-  "max-block-size"?: ArbitrarySpacing;
-  "min-block-size"?: ArbitrarySpacing;
+  "inline-size"?: ArbitraryValue;
+  "max-inline-size"?: ArbitraryValue;
+  "min-inline-size"?: ArbitraryValue;
+  "block-size"?: ArbitraryValue;
+  "max-block-size"?: ArbitraryValue;
+  "min-block-size"?: ArbitraryValue;
 };
 
 export type Position = {
   position?: PositionValue;
-  inset?: ArbitrarySpacing;
-  "inset-inline"?: ArbitrarySpacing;
-  "inset-inline-start"?: ArbitrarySpacing;
-  "inset-inline-end"?: ArbitrarySpacing;
-  "inset-block"?: ArbitrarySpacing;
-  "inset-block-start"?: ArbitrarySpacing;
-  "inset-block-end"?: ArbitrarySpacing;
+  inset?: ArbitraryValue;
+  "inset-inline"?: ArbitraryValue;
+  "inset-inline-start"?: ArbitraryValue;
+  "inset-inline-end"?: ArbitraryValue;
+  "inset-block"?: ArbitraryValue;
+  "inset-block-start"?: ArbitraryValue;
+  "inset-block-end"?: ArbitraryValue;
 };
 
 export type Flex = {
-  flex?: number | FlexValue;
+  flex?: FlexValue;
   "flex-direction"?: DirectionValue;
 };
 
 export type Grid = {
-  "grid-template-columns"?: string | number;
-  "grid-template-rows"?: string | number;
-  "grid-column"?: string | number;
-  "grid-row"?: string | number;
+  "grid-template-columns"?: ArbitraryValue;
+  "grid-template-rows"?: ArbitraryValue;
+  "grid-column"?: ArbitraryValue;
+  "grid-row"?: ArbitraryValue;
 };
 
 export type Display = {
@@ -107,11 +107,11 @@ export type Colors = {
 };
 
 export type BorderWidth = {
-  "border-width"?: ArbitrarySpacing;
-  "border-inline-width"?: ArbitrarySpacing;
-  "border-inline-start-width"?: ArbitrarySpacing;
-  "border-inline-end-width"?: ArbitrarySpacing;
-  "border-block-width"?: ArbitrarySpacing;
-  "border-block-start-width"?: ArbitrarySpacing;
-  "border-block-end-width"?: ArbitrarySpacing;
+  "border-width"?: ArbitraryValue;
+  "border-inline-width"?: ArbitraryValue;
+  "border-inline-start-width"?: ArbitraryValue;
+  "border-inline-end-width"?: ArbitraryValue;
+  "border-block-width"?: ArbitraryValue;
+  "border-block-start-width"?: ArbitraryValue;
+  "border-block-end-width"?: ArbitraryValue;
 };
