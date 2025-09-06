@@ -69,6 +69,12 @@ export type Flex = {
   "flex-direction"?: DirectionValue;
 };
 
+export type Gap = {
+  gap?: SpacingValue;
+  "row-gap"?: SpacingValue;
+  "column-gap"?: SpacingValue;
+};
+
 export type Grid = {
   "grid-template-columns"?: ArbitraryValue;
   "grid-template-rows"?: ArbitraryValue;

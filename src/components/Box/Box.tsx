@@ -17,11 +17,13 @@ import {
   type Position,
   type ResponsiveProperties,
   type Size,
+  type Gap,
 } from "./Box.types";
 
 type Props = {
   children?: ReactNode;
 } &
+  ResponsiveProperties<Gap> &
   ResponsiveProperties<Display> &
   ResponsiveProperties<AlignItems> &
   ResponsiveProperties<JustifyContent> &
