@@ -4,7 +4,7 @@ import { variantAttributify } from "unocss/preset-attributify";
 
 import { attributifyExtractor } from "./unocss/attributifyExtractor";
 import { type Theme, theme } from "./unocss/theme";
-import { CCS_VALUE_SPLITTER_REGEX } from "./unocss/utils/constants";
+import { SELECTOR_SPLITTER_REGEX } from "./unocss/utils/constants";
 import { createRules } from "./unocss/utils/createRules";
 import { unescapeCssSelector } from "./unocss/utils/unescapeCssSelector";
 import { generateCssVariablesFromTheme } from "./unocss/utils/generateCssVariablesFromTheme";
@@ -113,11 +113,16 @@ export default defineConfig<Theme>({
   ]),
   safelist: generateColorClasses(["color", "border-color", "background-color"]),
   postprocess(utilities) {
+      /**
+       * Here we transform unocss-generated selectors,
+       * like `.grid-template-columns-200px\ minmax\(900px\,\ 1fr\)\ 100px`,
+       * to more readable ones (`.grid-template-columns-200px-minmax-900px-1fr-100px`)
+       */
     utilities.selector = toEscapedSelector(
       (
         unescapeCssSelector(utilities.selector)
           .slice(1)
-          .match(CCS_VALUE_SPLITTER_REGEX) ?? []
+          .match(SELECTOR_SPLITTER_REGEX) ?? []
       ).join("-")
     );
   },

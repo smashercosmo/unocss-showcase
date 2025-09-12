@@ -1,6 +1,6 @@
 import { forwardRef, type ForwardedRef, type ReactNode } from "react";
 import { clsx } from "clsx";
-import { CCS_VALUE_SPLITTER_REGEX } from "../../../unocss/utils/constants";
+import { SELECTOR_SPLITTER_REGEX } from "../../../unocss/utils/constants";
 
 import {
   type AlignItems,
@@ -46,7 +46,7 @@ function generateClasses(props: Omit<Props, "children">) {
     .map(([key, value]) => {
       return [
         key,
-        (String(value).match(CCS_VALUE_SPLITTER_REGEX) ?? []).join("-"),
+        (String(value).match(SELECTOR_SPLITTER_REGEX) ?? []).join("-"),
       ].join("-");
     });
 }
