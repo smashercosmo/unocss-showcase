@@ -1,6 +1,4 @@
 import type { DynamicRule } from "unocss";
-
-import { normalizeCssValue } from "./normalizeCssValue";
 import { type Theme } from "../theme";
 
 type PropertyDescriptor = {
@@ -9,6 +7,10 @@ type PropertyDescriptor = {
   isUnitless?: boolean;
   additionalValues?: (string | number)[];
 };
+
+export function normalizeCssValue(value: string) {
+  return /^[0-9]+$/.test(value) ? `${value}px` : value;
+}
 
 function createRule({
   property,
@@ -33,8 +35,6 @@ function createRule({
   ];
 }
 
-export function createRules(
-  properties: PropertyDescriptor[]
-) {
+export function createRules(properties: PropertyDescriptor[]) {
   return properties.map(createRule);
 }
