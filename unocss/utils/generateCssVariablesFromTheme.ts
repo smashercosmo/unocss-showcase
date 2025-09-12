@@ -53,22 +53,18 @@ export function flattenTheme({
  *
  * Example:
  * const theme = { spacing: { "2xs": "0.125rem", xs: "0.25rem" }};
- * generateCssVariablesFromTheme({ theme, layer: "new-tokens" });
+ * generateCssVariablesFromTheme({ theme });
  *
  * Output:
- * "@layer new-tokens {
- * :where(:root, :host) {
+ * ":root {
  * --spacing-2xs: 0.125rem;
  * --spacing-xs: 0.25rem;
- * }
  * }"
  */
 export function generateCssVariablesFromTheme({
   theme,
-  layer,
 }: {
   theme: ThemePart;
-  layer: string;
 }) {
   const cssVariables = Object.entries(flattenTheme({ theme }))
     .map(([key, value]) => {
@@ -76,10 +72,6 @@ export function generateCssVariablesFromTheme({
     })
     .join("\r\n");
   return [
-    `@layer ${layer} {`,
-    ":where(:root, :host) {",
-    cssVariables,
-    "}",
-    "}",
+    ":root {", cssVariables, "}",
   ].join("\r\n");
 }

@@ -75,6 +75,7 @@ export const theme = {
   },
 } satisfies PresetUnoTheme;
 
+export type Theme = typeof theme;
 export type ColorValue = keyof typeof theme.colors;
 export type SpacingValue = keyof typeof theme.spacing | 0;
 export type BorderRadiusValue = keyof typeof theme.borderRadius;

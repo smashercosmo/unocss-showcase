@@ -5,7 +5,6 @@ import { expect, it } from "vitest";
 import { Box } from "../src/components/Box";
 import config from "../uno.config";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { safelist, preflights, ...configWithoutSafelist } = config;
 
 it("should generate correct class names", () => {
@@ -118,7 +117,9 @@ it("should generate correct CSS", async () => {
     </Box>
   `);
   expect(output.css).toMatchInlineSnapshot(`
-    "/* layer: default */
+    "@layer default;
+    /* layer: default */
+    @layer default{
     .flex-1{flex:1;}
     .flex-none{flex:none;}
     .color-info-surface{color:var(--colors-info-surface);}
@@ -171,6 +172,7 @@ it("should generate correct CSS", async () => {
     }
     @media (min-width: 80em){
     .xl\\:background-color-info-dark{background-color:var(--colors-info-dark);}
+    }
     }"
   `);
 });
@@ -198,7 +200,9 @@ it("should generate correct CSS for grid properties", async () => {
     </Box>
   `);
   expect(output.css).toMatchInlineSnapshot(`
-    "/* layer: default */
+    "@layer default;
+    /* layer: default */
+    @layer default{
     .flex-1{flex:1;}
     .display-grid{display:grid;}
     .grid-template-columns-200px-minmax-900px-1fr-100px{grid-template-columns:200px minmax(900px, 1fr) 100px;}
@@ -206,7 +210,8 @@ it("should generate correct CSS for grid properties", async () => {
     .grid-template-rows-repeat-10-18rem{grid-template-rows:repeat(10, 18rem);}
     .grid-column-1--1{grid-column:1 / -1;}
     .grid-column-1-1{grid-column:1 / 1;}
-    .grid-row-span-2{grid-row:span 2;}"
+    .grid-row-span-2{grid-row:span 2;}
+    }"
   `);
 });
 
@@ -221,7 +226,9 @@ it("should generate safelist", async () => {
     </Box>
   `);
   expect(output.css).toMatchInlineSnapshot(`
-    "/* layer: default */
+    "@layer default;
+    /* layer: default */
+    @layer default{
     .color-black{color:var(--colors-black);}
     .color-brand-dark{color:var(--colors-brand-dark);}
     .color-brand-light{color:var(--colors-brand-light);}
@@ -338,7 +345,8 @@ it("should generate safelist", async () => {
     .background-color-warning-light{background-color:var(--colors-warning-light);}
     .background-color-warning-main{background-color:var(--colors-warning-main);}
     .background-color-warning-surface{background-color:var(--colors-warning-surface);}
-    .background-color-white{background-color:var(--colors-white);}"
+    .background-color-white{background-color:var(--colors-white);}
+    }"
   `);
 });
 
@@ -350,9 +358,10 @@ it("should generate css variable", async () => {
     </Box>
   `);
   expect(output.css).toMatchInlineSnapshot(`
-    "/* layer: preflights */
-    @layer new-tokens {
-    :where(:root, :host) {
+    "@layer preflights, default;
+    /* layer: preflights */
+    @layer preflights{
+    :root {
     --breakpoints-sm: 40em;
     --breakpoints-md: 48em;
     --breakpoints-lg: 64em;

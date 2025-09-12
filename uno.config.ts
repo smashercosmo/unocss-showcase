@@ -3,7 +3,7 @@ import { defineConfig, toEscapedSelector } from "unocss";
 import { variantAttributify } from "unocss/preset-attributify";
 
 import { attributifyExtractor } from "./unocss/attributifyExtractor";
-import { theme } from "./unocss/theme";
+import { type Theme, theme } from "./unocss/theme";
 import { CCS_VALUE_SPLITTER_REGEX } from "./unocss/utils/constants";
 import { createRules } from "./unocss/utils/createRules";
 import { unescapeCssSelector } from "./unocss/utils/unescapeCssSelector";
@@ -37,12 +37,13 @@ function getPaddings(properties: string[]) {
   }));
 }
 
-export default defineConfig({
+export default defineConfig<Theme>({
   extendTheme() {
     return theme;
   },
+  // @ts-expect-error problem with unocss types
   variants: [variantAttributify(), variantBreakpoints()],
-  extractors: [attributifyExtractor()],
+  extractors: [attributifyExtractor({ components: ["Box"] })],
   rules: createRules([
     { property: "flex", isUnitless: true },
     { property: "color", token: "colors" },
@@ -120,11 +121,15 @@ export default defineConfig({
       ).join("-")
     );
   },
+  layers: {
+    tokens: 1,
+    utilities: 2,
+  },
+  outputToCssLayers: true,
   extractorDefault: false,
   preflights: [
     {
-      getCSS: () =>
-        generateCssVariablesFromTheme({ theme, layer: "new-tokens" }),
+      getCSS: generateCssVariablesFromTheme,
     },
   ],
 });

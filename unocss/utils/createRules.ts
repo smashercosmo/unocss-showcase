@@ -1,6 +1,7 @@
 import type { DynamicRule } from "unocss";
 
 import { normalizeCssValue } from "./normalizeCssValue";
+import { type Theme } from "../theme";
 
 type PropertyDescriptor = {
   property: string;
@@ -14,7 +15,7 @@ function createRule({
   token,
   isUnitless,
   additionalValues,
-}: PropertyDescriptor): DynamicRule {
+}: PropertyDescriptor): DynamicRule<Theme> {
   return [
     new RegExp(`^${property}-(.*)$`),
     ([, value]) => {
@@ -32,6 +33,8 @@ function createRule({
   ];
 }
 
-export function createRules(properties: PropertyDescriptor[]) {
+export function createRules(
+  properties: PropertyDescriptor[]
+) {
   return properties.map(createRule);
 }
