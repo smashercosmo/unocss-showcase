@@ -1,6 +1,4 @@
-function camelToKebabCase(str: string) {
-  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
-}
+import { camelCaseToKebabCase } from "./utils";
 
 type ThemePart = { [Key in string]: ThemeValue };
 type ThemeValue = string | number | ThemePart;
@@ -49,29 +47,37 @@ export function flattenTheme({
 }
 
 /**
- * Generates CSS variables from theme.
+ * Generates CSS variables from the theme.
  *
  * Example:
  * const theme = { spacing: { "2xs": "0.125rem", xs: "0.25rem" }};
- * generateCssVariablesFromTheme({ theme });
+ * generateCssVariablesFromTheme({ theme, layer: "new-tokens" });
  *
  * Output:
- * ":root {
+ * "@layer new-tokens {
+ * :where(:root, :host) {
  * --spacing-2xs: 0.125rem;
  * --spacing-xs: 0.25rem;
+ * }
  * }"
  */
 export function generateCssVariablesFromTheme({
   theme,
+  layer,
 }: {
   theme: ThemePart;
+  layer: string;
 }) {
   const cssVariables = Object.entries(flattenTheme({ theme }))
     .map(([key, value]) => {
-      return `--${camelToKebabCase(key)}: ${value};`;
+      return `--${camelCaseToKebabCase(key)}: ${value};`;
     })
     .join("\r\n");
   return [
-    ":root {", cssVariables, "}",
+    `@layer ${layer} {`,
+    ":where(:root, :host) {",
+    cssVariables,
+    "}",
+    "}",
   ].join("\r\n");
 }

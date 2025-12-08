@@ -40,7 +40,7 @@ export default tseslint.config(
       "react-hooks/rules-of-hooks": "off",
     },
   },
-  globalIgnores(["package-lock.json", "eslint.config.mjs"]),
+  globalIgnores(["package-lock.json", "eslint.config.mjs", "build"]),
   {
     settings: {
       "import/resolver": {
@@ -52,7 +52,6 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
       },
     },
   }

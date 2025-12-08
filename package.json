@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -b",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm run lint --fix",
     "prettier": "prettier --check '**/*.*(md|json|yaml|html|yml|js|ts|tsx)' --log-level warn",
@@ -16,17 +16,18 @@
     "test": "vitest"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@storybook/react-vite": "^9.1.1",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@unocss/preset-mini": "^66.5.1",
+    "@unocss/preset-mini": "^66.5.10",
     "@vitejs/plugin-react": "^4.6.0",
+    "csstype": "^3.2.3",
     "eslint": "^9.30.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -35,12 +36,12 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.3.0",
     "jsdom": "^25.0.1",
-    "prettier": "^3.2.5",
+    "prettier": "^3.7.4",
     "storybook": "^9.1.1",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.40.0",
-    "unocss": "^66.5.1",
-    "vite": "^7.0.4",
+    "typescript-eslint": "^8.48.1",
+    "unocss": "^66.5.10",
+    "vite": "^7.2.6",
     "vitest": "^3.1.1"
   }
 }

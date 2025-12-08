@@ -1,16 +1,11 @@
-import { Box } from "./components/Box";
+import { Box } from "@/components/LayoutPrimitives/Box";
 
 export function App() {
   return (
-    <Box display="grid" grid-template-columns="1fr" md:grid-template-columns="1fr 1fr" gap="sm">
-      <Box display="grid" grid-column="1/-1" grid-template-columns="subgrid">
-        <Box background-color="success-main">Hello</Box>
-        <Box background-color="warning-light">Hello</Box>
-      </Box>
-      <Box display="grid" grid-column="1/-1" grid-template-columns="subgrid">
-        <Box background-color="success-main">Hello</Box>
-        <Box background-color="warning-light">Hello</Box>
-      </Box>
+    <Box inlineSize={300}>
+      <h1>
+        Unocss Showcase. Run `npm storybook` to play around with components.
+      </h1>
     </Box>
   );
 }

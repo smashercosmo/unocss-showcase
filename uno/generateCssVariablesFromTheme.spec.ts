@@ -27,9 +27,11 @@ it("should generate css variables from the theme object", () => {
         full: "50%",
       },
     },
+    layer: "tokens",
   });
   expect(result).toMatchInlineSnapshot(`
-    ":root {
+    "@layer tokens {
+    :where(:root, :host) {
     --breakpoints-sm: 640px;
     --breakpoints-md: 768px;
     --breakpoints-lg: 1024px;
@@ -43,6 +45,7 @@ it("should generate css variables from the theme object", () => {
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
     --border-radius-full: 50%;
+    }
     }"
   `);
 });

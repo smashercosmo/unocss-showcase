@@ -1,4 +1,4 @@
-import { type Extractor } from "unocss";
+import type { Extractor } from "unocss";
 
 const SPACES = String.raw`\s*`;
 const COMPONENT_NAME = `[a-zA-Z][a-zA-Z]*`;
@@ -19,7 +19,10 @@ const ELEMENT_RE = new RegExp(
   <
     (?<name>${COMPONENT_NAME})
     (?<attributes>
-      (?:\s+${ATTRIBUTE_NAME}${SPACES}=${SPACES}${ATTRIBUTE_VALUE})+
+      (?:
+        (\s+${ATTRIBUTE_NAME}${SPACES}=${SPACES}${ATTRIBUTE_VALUE}) |
+        (\s+${ATTRIBUTE_NAME}${SPACES}[^=])
+      )+
     )
     \s*
   \/?>
@@ -36,17 +39,17 @@ const ATTRIBUTE_RE = new RegExp(
   "g"
 );
 
-const STRING_RE = /(["'])(?<value>.*?)\1/g;
+const STRING_RE = /(["'`])(?<value>.*?)\1/g;
 
 const NUMBER_RE = /(?<value>\b\d+(\.\d+)?\b)/g;
 
-export function attributifyExtractor({
+export function extractor({
   components,
 }: {
   components?: string[];
 }): Extractor {
   return {
-    name: "attributify-extractor",
+    name: "extractor",
     extract({ code }) {
       const results: string[] = [];
       let elementMatch: RegExpExecArray | null = null;
