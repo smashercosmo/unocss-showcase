@@ -1,4 +1,4 @@
-import { camelCaseToKebabCase } from "./utils";
+import { camelCaseToKebabCase } from "../utils";
 
 type ThemePart = { [Key in string]: ThemeValue };
 type ThemeValue = string | number | ThemePart;

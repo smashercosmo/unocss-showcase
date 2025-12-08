@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 
-import { generateCssVariablesFromTheme } from "./generateCssVariablesFromTheme";
+import { generateCssVariablesFromTheme } from "../generators/generateCssVariablesFromTheme";
 
 it("should generate css variables from the theme object", () => {
   const result = generateCssVariablesFromTheme({

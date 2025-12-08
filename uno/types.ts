@@ -89,30 +89,3 @@ export type VerticalAlign = PropsFromDescriptor<
 >;
 export type BorderStyle = PropsFromDescriptor<typeof descriptors.borderStyle>;
 export type BorderWidths = PropsFromDescriptor<typeof descriptors.borderWidths>;
-
-export type UnocssProps = Colors &
-  Margins &
-  Paddings &
-  BorderRadiuses &
-  Overflows &
-  Display &
-  Position &
-  Flex &
-  Insets &
-  Sizes &
-  TextAlign &
-  VerticalAlign &
-  BorderStyle &
-  BorderWidths &
-  Gaps &
-  FlexDirection &
-  AlignItems &
-  AlignSelfJustifySelf &
-  JustifyContent &
-  AlignContent &
-  FlexWrap &
-  FlexDirectionShortcuts &
-  AlignItemsShortcuts &
-  JustifyContentShortcuts &
-  Grid &
-  GridShortcuts

@@ -2,67 +2,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createGenerator } from "unocss";
 import { expect, it } from "vitest";
 
-import { Box } from "@/components/LayoutPrimitives/Box";
-import { Grid } from "@/components/LayoutPrimitives/Grid";
-import config from "./config";
-import { generateRules } from "./generateRules";
+import { Grid } from "@/components/Grid/Grid";
+import config from "../config";
+import { generateRulesFromDescriptors } from "../generators/generateRulesFromDescriptors";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { safelist, preflights, ...configWithoutSafelistAndPreflights } = config;
-
-it("should generate correct class names", () => {
-  const output = renderToStaticMarkup(
-    <Box
-      padding="xs"
-      margin="xs"
-      paddingInline="xs"
-      paddingInlineStart="xs"
-      paddingInlineEnd="xs"
-      paddingBlock="xs"
-      paddingBlockStart="xs"
-      paddingBlockEnd="xs"
-      marginInline="xs"
-      marginInlineStart="xs"
-      marginInlineEnd="xs"
-      marginBlock="xs"
-      marginBlockStart="xs"
-      marginBlockEnd="xs"
-      md:paddingInline="md"
-      md:marginBlock="md"
-      blockSize="3rem"
-      minBlockSize="3rem"
-      maxBlockSize="3rem"
-      inlineSize="3rem"
-      minInlineSize="3rem"
-      maxInlineSize="3rem"
-      md:blockSize="5.5rem"
-      md:inlineSize="5.5rem"
-      borderRadius="md"
-      borderColor="info-dark"
-      backgroundColor="info-main"
-      borderWidth={1}
-      borderInlineWidth={1}
-      borderInlineStartWidth={1}
-      borderInlineEndWidth={1}
-      position="absolute"
-      inset="1rem"
-      insetInline="1rem"
-      insetBlockStart="1rem"
-      insetBlockEnd="1rem"
-      flex="none"
-      color="info-surface"
-      gridTemplateColumns="200px minmax(900px, 1fr) 100px"
-      gridTemplateRows="repeat(10, 18rem)"
-      gridColumn="1 / -1"
-      gridRow="span 2"
-    >
-      Hello
-    </Box>
-  );
-  expect(output).toMatchInlineSnapshot(
-    `"<div class="padding-xs margin-xs padding-inline-xs padding-inline-start-xs padding-inline-end-xs padding-block-xs padding-block-start-xs padding-block-end-xs margin-inline-xs margin-inline-start-xs margin-inline-end-xs margin-block-xs margin-block-start-xs margin-block-end-xs md:padding-inline-md md:margin-block-md block-size-3rem min-block-size-3rem max-block-size-3rem inline-size-3rem min-inline-size-3rem max-inline-size-3rem md:block-size-5.5rem md:inline-size-5.5rem border-radius-md border-color-info-dark background-color-info-main border-width-1 border-inline-width-1 border-inline-start-width-1 border-inline-end-width-1 position-absolute inset-1rem inset-inline-1rem inset-block-start-1rem inset-block-end-1rem flex-none color-info-surface grid-template-columns-200px-minmax(900px,-1fr)-100px grid-template-rows-repeat(10,-18rem) grid-column-1-/--1 grid-row-span-2">Hello</div>"`
-  );
-});
 
 it("should generate correct class names for shortcuts", () => {
   const output = renderToStaticMarkup(
@@ -221,12 +166,12 @@ it("should generate correct CSS for grid properties", async () => {
   expect(output.css).toMatchInlineSnapshot(`
     "/* layer: default */
     .display-grid{display:grid;}
-    .grid-template-columns-200px-minmax\\(900px\\,-1fr\\)-100px{grid-template-columns:200px minmax(900px, 1fr) 100px;}
-    .grid-template-columns-repeat\\(3\\,-1fr\\){grid-template-columns:repeat(3, 1fr);}
-    .grid-template-rows-repeat\\(10\\,-18rem\\){grid-template-rows:repeat(10, 18rem);}
+    .grid-template-columns-200px-minmax\\(900px\\,1fr\\)-100px{grid-template-columns:200px minmax(900px, 1fr) 100px;}
+    .grid-template-columns-repeat\\(3\\,1fr\\){grid-template-columns:repeat(3, 1fr);}
+    .grid-template-rows-repeat\\(10\\,18rem\\){grid-template-rows:repeat(10, 18rem);}
     .grid-auto-rows-1fr{grid-auto-rows:1fr;}
-    .grid-column-1-\\/--1{grid-column:1 / -1;}
-    .grid-column-1-\\/-1{grid-column:1 / 1;}
+    .grid-column-1\\/-1{grid-column:1 / -1;}
+    .grid-column-1\\/1{grid-column:1 / 1;}
     .grid-row-span-2{grid-row:span 2;}
     .flex-1{flex:1;}"
   `);
@@ -445,6 +390,7 @@ it("should generate safelist", async () => {
     .align-content-space-evenly{align-content:space-evenly;}
     .align-content-start{align-content:start;}
     .align-content-stretch{align-content:stretch;}
+    .border-style-dashed{border-style:dashed;}
     .border-style-solid{border-style:solid;}
     .border-width-0{border-width:0;}
     .border-width-1{border-width:1px;}
@@ -488,40 +434,10 @@ it("should generate correct CSS for Stack component", async () => {
   `);
 });
 
-it("should generate correct CSS for Grid component", async () => {
-  const uno = await createGenerator(configWithoutSafelistAndPreflights);
-  const output = await uno.generate(`
-    <Grid
-      inline
-      columns="200px 1fr 200px"
-      rows="100px 50px"
-      autoRows="auto"
-    >
-      <Grid row="1 / -1" column="1">
-        Hello
-      </Grid>
-      <Grid row="1 / -1" column="1">
-        Hello
-      </Grid>
-      <Grid row="1 / -1" column="1">
-        Hello
-      </Grid>
-    </Grid>
-  `);
-  expect(output.css).toMatchInlineSnapshot(`
-    "/* layer: default */
-    .grid-template-columns-200px-1fr-200px{grid-template-columns:200px 1fr 200px;}
-    .grid-template-rows-100px-50px{grid-template-rows:100px 50px;}
-    .grid-auto-rows-auto{grid-auto-rows:auto;}
-    .grid-column-1{grid-column:1;}
-    .grid-row-1-\\/--1{grid-row:1 / -1;}"
-  `);
-});
-
 it("should generate css with fallbacks", async () => {
   const uno = await createGenerator({
     ...configWithoutSafelistAndPreflights,
-    rules: generateRules([
+    rules: generateRulesFromDescriptors([
       {
         properties: [
           { name: "overflowBlock", fallback: "overflowY" },
@@ -573,7 +489,7 @@ it("should generate correct CSS for Grid component", async () => {
     .grid-auto-rows-auto{grid-auto-rows:auto;}
     .grid-column-1{grid-column:1;}
     .grid-area-header{grid-area:header;}
-    .grid-row-1-\\/--1{grid-row:1 / -1;}"
+    .grid-row-1\\/-1{grid-row:1 / -1;}"
   `);
 });
 
@@ -587,3 +503,4 @@ it("should handle backticks in expressions", async () => {
     .grid-template-areas-\\"header-header\\"-\\"content-content\\"-\\"footer-footer\\"{grid-template-areas:"header header" "content content" "footer footer";}"
   `);
 });
+

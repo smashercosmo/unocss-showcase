@@ -43,56 +43,61 @@ const STRING_RE = /(["'`])(?<value>.*?)\1/g;
 
 const NUMBER_RE = /(?<value>\b\d+(\.\d+)?\b)/g;
 
+export function extract(
+  { code, components }: { code: string, components?: string[] },
+) {
+  const results = new Set<string>();
+  let elementMatch: RegExpExecArray | null = null;
+  while ((elementMatch = ELEMENT_RE.exec(code)) !== null) {
+    let attributeMatch: RegExpExecArray | null = null;
+    const component = elementMatch.groups!.name;
+
+    if (components && !components.includes(component)) continue;
+
+    while (
+      (attributeMatch = ATTRIBUTE_RE.exec(elementMatch.groups!.attributes)) !==
+      null
+    ) {
+      let value = attributeMatch.groups!.value;
+      const name = attributeMatch.groups!.name;
+      const isExpression = value.startsWith("{");
+      value = value.slice(1, -1).trim();
+
+      if (!isExpression) {
+        results.add(`${name}-${value}`);
+        continue;
+      }
+
+      let stringMatch: RegExpExecArray | null;
+      let numberMatch: RegExpExecArray | null;
+
+      // Get all strings from the expression
+      while ((stringMatch = STRING_RE.exec(value)) !== null) {
+        results.add(`${name}-${stringMatch.groups!.value}`);
+      }
+
+      // Remove all strings from the expression to avoid
+      // picking numbers inside them
+      value = value.replace(STRING_RE, " ");
+
+      // Get all standalone numbers from the expression
+      while ((numberMatch = NUMBER_RE.exec(value)) !== null) {
+        results.add(`${name}-${numberMatch.groups!.value.trim()}`);
+      }
+    }
+  }
+  return Array.from(results);
+}
+
 export function extractor({
   components,
 }: {
   components?: string[];
-}): Extractor {
+} = {}): Extractor {
   return {
     name: "extractor",
     extract({ code }) {
-      const results: string[] = [];
-      let elementMatch: RegExpExecArray | null = null;
-      while ((elementMatch = ELEMENT_RE.exec(code)) !== null) {
-        let attributeMatch: RegExpExecArray | null = null;
-        const component = elementMatch.groups!.name;
-
-        if (components && !components.includes(component)) continue;
-
-        while (
-          (attributeMatch = ATTRIBUTE_RE.exec(
-            elementMatch.groups!.attributes
-          )) !== null
-        ) {
-          let value = attributeMatch.groups!.value;
-          const name = attributeMatch.groups!.name;
-          const isExpression = value.startsWith("{");
-          value = value.slice(1, -1).trim();
-
-          if (!isExpression) {
-            results.push(`${name}-${value}`);
-            continue;
-          }
-
-          let stringMatch: RegExpExecArray | null;
-          let numberMatch: RegExpExecArray | null;
-
-          // Get all strings from the expression
-          while ((stringMatch = STRING_RE.exec(value)) !== null) {
-            results.push(`${name}-${stringMatch.groups!.value}`);
-          }
-
-          // Remove all strings from the expression to avoid
-          // picking numbers inside them
-          value = value.replace(STRING_RE, " ");
-
-          // Get all standalone numbers from the expression
-          while ((numberMatch = NUMBER_RE.exec(value)) !== null) {
-            results.push(`${name}-${numberMatch.groups!.value.trim()}`);
-          }
-        }
-      }
-      return results;
+      return extract({ code, components });
     },
   };
 }

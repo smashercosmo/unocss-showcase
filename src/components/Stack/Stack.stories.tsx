@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 
-import { Box } from "./Box";
+import { Box } from "../Box/Box";
 import { Stack } from "./Stack";
 
 const meta = {

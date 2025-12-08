@@ -1,4 +1,4 @@
-import { Box } from "@/components/LayoutPrimitives/Box";
+import { Box } from "@/components/Box/Box";
 
 export function App() {
   return (

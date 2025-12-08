@@ -1,5 +1,5 @@
 import type { DataType, Globals, Property } from "csstype";
-import type { theme } from "./theme";
+import { theme } from "./theme";
 
 export type Descriptor = {
   properties: (
@@ -229,7 +229,7 @@ export const verticalAlign = {
 
 export const borderStyle = {
   properties: ["borderStyle"],
-  values: ["solid"] satisfies DataType.LineStyle[],
+  values: ["solid", "dashed"] satisfies DataType.LineStyle[],
 } as const satisfies Descriptor;
 
 export const borderWidths = {

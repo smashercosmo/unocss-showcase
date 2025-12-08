@@ -67,5 +67,3 @@ export const theme = {
     full: "50%",
   },
 } satisfies PresetUnoTheme;
-
-export type Theme = typeof theme;
