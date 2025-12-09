@@ -8,6 +8,7 @@ import type {
   AlignItems,
   Display,
   FlexDirection,
+  FlexDirectionShortcuts,
   Grid,
   JustifyContent,
   ResponsiveProperties,
@@ -18,7 +19,12 @@ type Props<E extends keyof JSX.IntrinsicElements> = PolymorphicProps<
   ResponsiveProperties<
     Omit<
       UnocssProps,
-      keyof (Display & Grid & FlexDirection & AlignItems & JustifyContent)
+      keyof (Display &
+        Grid &
+        FlexDirection &
+        FlexDirectionShortcuts &
+        AlignItems &
+        JustifyContent)
     >
   > &
     (
