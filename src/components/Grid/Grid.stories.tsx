@@ -43,7 +43,7 @@ export const Areas: Story = {
     <Grid
       inline
       areas='"header header" "content content" "footer footer"'
-      columns="200px 1fr 200px"
+      columns="200px 2fr 200px"
       rows="100px 50px"
       autoRows="auto"
     >
