@@ -8,8 +8,8 @@ can adjust it to your needs, even exotic ones.
 I wanted to create primitive layout components like Box, Stack, Grid, etc.,
 which props values can be specified in a human-readable form. So instead of writing
 cryptic Tailwind classes like `grid-cols-[200px_minmax(900px,_1fr)_100px]`, you could
-write `<Grid columns="200px minmax(900px, 1fr) 100px" />` which is more aligned with
-the CSS syntax.
+write `<Grid columns="200px minmax(900px, 1fr) 100px" />` (which is more aligned with
+the CSS syntax) and get the same static css extraction we all love.
 
 ## Extractor
 
