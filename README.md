@@ -1,6 +1,6 @@
 # Unocss Showcase
 
-This demo project shows how flexible Unocss is and how you
+This demo project shows how flexible [Unocss](https://unocss.dev/) is and how you
 can adjust it to your needs, even exotic ones.
 
 ## The goal
@@ -16,7 +16,7 @@ the CSS syntax.
 To achieve this, I created my own attributes extractor that allows spaces in
 attribute values.
 
-## Differences with attributify-preset
+## Differences with [attributify-preset](https://unocss.dev/presets/attributify)
 
  - You can use spaces in attribute values
  - You can specify certain components to extract attributes from
