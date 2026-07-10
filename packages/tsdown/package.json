@@ -1,0 +1,31 @@
+{
+  "name": "@unocss-box-component/tsdown",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smashercosmo/unocss-box-component.git",
+    "directory": "packages/tsdown"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@unocss-box-component/tsconfig": "workspace:*"
+  },
+  "peerDependencies": {
+    "tsdown": ">=0.22.3"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./*"
+  }
+}

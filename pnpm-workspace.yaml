@@ -1,0 +1,20 @@
+packages:
+  - .changesets
+  - packages/*
+  - apps/*
+
+allowBuilds:
+  esbuild: true
+
+catalogs:
+  dev:
+    vite: 8.1.3
+    vitest: 4.1.9
+    "@vitejs/plugin-react": 6.0.3
+    tsdown: 0.22.3
+    typescript: 6.0.3
+  types:
+    "@types/node": 24.0.0
+  tools:
+    actions-up: 1.14.3
+    turbo: 2.10.0

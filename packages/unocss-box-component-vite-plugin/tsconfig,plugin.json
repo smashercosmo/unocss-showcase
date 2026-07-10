@@ -1,0 +1,14 @@
+{
+  "extends": "@unocss-box-component/tsconfig/lib",
+  "include": ["./src/plugin"],
+  "compilerOptions": {
+    "rootDir": "./src/plugin",
+    "lib": ["ESNext"],
+    "types": ["node"]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.shared.json"
+    }
+  ]
+}

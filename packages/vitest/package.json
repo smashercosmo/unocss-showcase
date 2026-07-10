@@ -1,0 +1,33 @@
+{
+  "name": "@unocss-box-component/vitest",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smashercosmo/unocss-box-component.git",
+    "directory": "packages/vitest"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@unocss-box-component/tsconfig": "workspace:*",
+    "@unocss-box-component/tsdown": "workspace:*"
+  },
+  "peerDependencies": {
+    "vite": ">=8",
+    "vitest": ">=4"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./*"
+  }
+}

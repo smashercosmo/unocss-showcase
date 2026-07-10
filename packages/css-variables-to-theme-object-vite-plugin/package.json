@@ -1,0 +1,35 @@
+{
+  "name": "@unocss-box-component/css-variables-to-theme-object-vite-plugin",
+  "type": "module",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smashercosmo/unocss-box-component.git",
+    "directory": "packages/css-variables-to-theme-object-vite-plugin"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "postcss": "^8.5.15"
+  },
+  "devDependencies": {
+    "@unocss-box-component/tsconfig": "workspace:*",
+    "@unocss-box-component/tsdown": "workspace:*",
+    "vite": "catalog:dev"
+  },
+  "peerDependencies": {
+    "vite": ">=8"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./*"
+  }
+}

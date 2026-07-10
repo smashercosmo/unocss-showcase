@@ -1,0 +1,4 @@
+{
+  "extends": "@unocss-box-component/tsconfig/tsconfig.base.json",
+  "include": ["./src"]
+}

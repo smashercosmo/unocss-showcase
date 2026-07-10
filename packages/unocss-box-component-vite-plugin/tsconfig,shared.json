@@ -1,0 +1,7 @@
+{
+  "extends": "@unocss-box-component/tsconfig/lib",
+  "include": ["./src/shared"],
+  "compilerOptions": {
+    "rootDir": "./src/plugin"
+  }
+}

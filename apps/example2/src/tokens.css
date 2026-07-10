@@ -1,0 +1,176 @@
+@layer tokens {
+  :where(:root, :host) {
+    /* Colors */
+    --color__black: oklch(0 0 0); /* #000000 */
+    --color__blue-50: oklch(0.9705 0.0143 254.66); /* #EFF6FF */
+    --color__blue-100: oklch(0.9319 0.0317 255.61); /* #DBEAFE */
+    --color__blue-200: oklch(0.8827 0.0583 254.83); /* #BFDBFF */
+    --color__blue-300: oklch(0.8092 0.1 249.59); /* #8EC6FF */
+    --color__blue-400: oklch(0.7036 0.1587 253.42); /* #50A2FF */
+    --color__blue-500: oklch(0.6189 0.2066 259.36); /* #2C7FFF */
+    --color__blue-600: oklch(0.5457 0.2443 262.91); /* #165DFB */
+    --color__blue-700: oklch(0.4878 0.2433 264.41); /* #1447E6 */
+    --color__blue-800: oklch(0.4242 0.1983 265.5); /* #193CB8 */
+    --color__blue-900: oklch(0.3796 0.1453 265.47); /* #1C398E */
+    --color__blue-950: oklch(0.2802 0.0909 268.05); /* #162455 */
+    --color__gray-50: oklch(0.9846 0.0018 248.57); /* #F9FAFB */
+    --color__gray-100: oklch(0.967 0.003 264.51); /* #F3F4F6 */
+    --color__gray-200: oklch(0.9276 0.0059 264.52); /* #E5E7EB */
+    --color__gray-300: oklch(0.872 0.0106 261.8); /* #D1D5DC */
+    --color__gray-400: oklch(0.7075 0.0206 262.98); /* #9AA1AE */
+    --color__gray-500: oklch(0.5502 0.0273 262.02); /* #697282 */
+    --color__gray-600: oklch(0.4461 0.0299 257.69); /* #4A5565 */
+    --color__gray-700: oklch(0.3731 0.0343 260.18); /* #364153 */
+    --color__gray-800: oklch(0.2778 0.0319 256.29); /* #1E2938 */
+    --color__gray-900: oklch(0.2099 0.0342 263.44); /* #101828 */
+    --color__gray-950: oklch(0.1296 0.0274 261.7); /* #030712 */
+    --color__green-50: oklch(0.9819 0.018 156.09); /* #F0FDF4 */
+    --color__green-100: oklch(0.9624 0.0434 156.85); /* #DCFCE7 */
+    --color__green-200: oklch(0.925 0.0805 156.05); /* #BBF7D0 */
+    --color__green-300: oklch(0.8712 0.1363 154.48); /* #86EFAC */
+    --color__green-400: oklch(0.8003 0.182 151.73); /* #4ADE80 */
+    --color__green-500: oklch(0.7227 0.192 149.6); /* #22C55E */
+    --color__green-600: oklch(0.627 0.1699 149.23); /* #16A34A */
+    --color__green-700: oklch(0.5273 0.1371 150.09); /* #15803D */
+    --color__green-800: oklch(0.4479 0.1083 151.35); /* #166534 */
+    --color__green-900: oklch(0.3925 0.0896 152.56); /* #14532D */
+    --color__green-950: oklch(0.2664 0.0628 152.96); /* #052E16 */
+    --color__lilac-50: oklch(0.958 0.0203 279.87); /* #EEF0FF */
+    --color__lilac-100: oklch(0.9299 0.0335 272.77); /* #E0E7FF */
+    --color__lilac-200: oklch(0.8526 0.0751 283.01); /* #C7C9FF */
+    --color__lilac-300: oklch(0.7522 0.1312 282.78); /* #A3A3FF */
+    --color__lilac-400: oklch(0.6564 0.1886 282.28); /* #837CFF */
+    --color__lilac-500: oklch(0.5896 0.2288 279.82); /* #6A5FFF */
+    --color__lilac-600: oklch(0.5101 0.2619 276.94); /* #4F39F6 */
+    --color__lilac-700: oklch(0.4562 0.2397 276.94); /* #432DD7 */
+    --color__lilac-800: oklch(0.402 0.1947 280); /* #3D29AC */
+    --color__lilac-900: oklch(0.3673 0.142 284.7); /* #3B2C85 */
+    --color__lilac-950: oklch(0.262 0.0901 286.51); /* #231A4D */
+    --color__orange-50: oklch(0.9796 0.0157 73.64); /* #FFF7ED */
+    --color__orange-100: oklch(0.9542 0.0371 75.15); /* #FFEDD5 */
+    --color__orange-200: oklch(0.9015 0.0729 70.69); /* #FED7AA */
+    --color__orange-300: oklch(0.8366 0.1165 66.28); /* #FDBA74 */
+    --color__orange-400: oklch(0.7577 0.159 55.93); /* #FB923C */
+    --color__orange-500: oklch(0.7049 0.1867 47.6); /* #F97316 */
+    --color__orange-600: oklch(0.6461 0.1943 41.11); /* #EA580C */
+    --color__orange-700: oklch(0.5534 0.1738 38.39); /* #C2410C */
+    --color__orange-800: oklch(0.4698 0.143 37.29); /* #9A3412 */
+    --color__orange-900: oklch(0.4084 0.1164 38.16); /* #7C2D12 */
+    --color__orange-950: oklch(0.2659 0.0762 36.25); /* #431407 */
+    --color__pink-50: oklch(0.9714 0.0142 342.87); /* #FDF2F8 */
+    --color__pink-100: oklch(0.9482 0.0277 342.09); /* #FCE7F3 */
+    --color__pink-200: oklch(0.8994 0.0589 343.16); /* #FBCFE8 */
+    --color__pink-300: oklch(0.8228 0.1095 345.98); /* #F9A8D4 */
+    --color__pink-400: oklch(0.7253 0.1752 349.74); /* #F472B6 */
+    --color__pink-500: oklch(0.6559 0.2118 354.3); /* #EC4899 */
+    --color__pink-600: oklch(0.5917 0.218 0.57); /* #DB2777 */
+    --color__pink-700: oklch(0.5246 0.1989 3.95); /* #BE185D */
+    --color__pink-800: oklch(0.4587 0.1697 3.81); /* #9D174D */
+    --color__pink-900: oklch(0.4078 0.1442 2.42); /* #831843 */
+    --color__pink-950: oklch(0.2845 0.1048 3.9); /* #500724 */
+    --color__purple-50: oklch(0.9658 0.0148 294.31); /* #F4F2FD */
+    --color__purple-100: oklch(0.9433 0.0285 294.51); /* #EDE9FE */
+    --color__purple-200: oklch(0.8946 0.0563 293.02); /* #DDD6FF */
+    --color__purple-300: oklch(0.8101 0.1056 293.68); /* #C4B4FF */
+    --color__purple-400: oklch(0.6989 0.176 294.11); /* #A684FF */
+    --color__purple-500: oklch(0.6005 0.2425 293.89); /* #8E51FF */
+    --color__purple-600: oklch(0.5404 0.2811 292.85); /* #7F22FE */
+    --color__purple-700: oklch(0.4907 0.27 292.57); /* #7008E7 */
+    --color__purple-800: oklch(0.4316 0.232 292.71); /* #5D0EC0 */
+    --color__purple-900: oklch(0.3801 0.1889 293.64); /* #4D179A */
+    --color__purple-950: oklch(0.284 0.1415 291.29); /* #2F0D68 */
+    --color__red-50: oklch(0.9705 0.0129 17.04); /* #FEF2F2 */
+    --color__red-100: oklch(0.9356 0.0309 17.58); /* #FEE2E2 */
+    --color__red-200: oklch(0.8845 0.0592 18.27); /* #FECACA */
+    --color__red-300: oklch(0.8077 0.1035 19.54); /* #FCA5A5 */
+    --color__red-400: oklch(0.7106 0.1661 22.2); /* #F87171 */
+    --color__red-500: oklch(0.6369 0.2078 25.32); /* #EF4444 */
+    --color__red-600: oklch(0.5771 0.2151 27.32); /* #DC2626 */
+    --color__red-700: oklch(0.5054 0.1905 27.51); /* #B91C1C */
+    --color__red-800: oklch(0.4437 0.1613 26.89); /* #991B1B */
+    --color__red-900: oklch(0.3959 0.1331 25.71); /* #7F1D1D */
+    --color__red-950: oklch(0.2575 0.0885 26.03); /* #450A0A */
+    --color__teal-50: oklch(0.9836 0.0142 181.06); /* #F0FDFA */
+    --color__teal-100: oklch(0.9526 0.0498 180.9); /* #CCFBF1 */
+    --color__teal-200: oklch(0.9099 0.0927 180.48); /* #99F6E4 */
+    --color__teal-300: oklch(0.8549 0.1251 181.11); /* #5EEAD4 */
+    --color__teal-400: oklch(0.7845 0.1325 181.94); /* #2DD4BF */
+    --color__teal-500: oklch(0.7037 0.123 182.53); /* #14B8A6 */
+    --color__teal-600: oklch(0.6002 0.1039 184.73); /* #0D9488 */
+    --color__teal-700: oklch(0.5109 0.0861 186.42); /* #0F766E */
+    --color__teal-800: oklch(0.437 0.0705 188.25); /* #115E59 */
+    --color__teal-900: oklch(0.3861 0.059 188.45); /* #134E4A */
+    --color__teal-950: oklch(0.2773 0.0447 192.56); /* #042F2E */
+    --color__white: oklch(1 0.0001 263.28); /* #FFFFFF */
+    --color__yellow-50: oklch(0.9873 0.0262 102.28); /* #FEFCE8 */
+    --color__yellow-100: oklch(0.9727 0.0705 103.32); /* #FEF9C2 */
+    --color__yellow-200: oklch(0.9466 0.1292 102.4); /* #FEF186 */
+    --color__yellow-300: oklch(0.9052 0.1823 98.7); /* #FFE020 */
+    --color__yellow-400: oklch(0.8545 0.1746 88.39); /* #FEC700 */
+    --color__yellow-500: oklch(0.7958 0.1638 82.17); /* #F0B000 */
+    --color__yellow-600: oklch(0.6834 0.1471 71.05); /* #D18700 */
+    --color__yellow-700: oklch(0.5566 0.1266 63.25); /* #A66000 */
+    --color__yellow-800: oklch(0.4761 0.1106 60.93); /* #884B00 */
+    --color__yellow-900: oklch(0.4197 0.0957 56.9); /* #733D0A */
+    --color__yellow-950: oklch(0.353 0.0823 52.45); /* #431F05 */
+
+    /* Spacings */
+    --space__xs: 0.25rem; /* 4px  */
+    --space__sm: 0.5rem; /* 8px  */
+    --space__md: 0.75rem; /* 12px */
+    --space__lg: 1rem; /* 16px */
+    --space__xl: 1.5rem; /* 24px */
+    --space__2xl: 2rem; /* 32px */
+    --space__3xl: 2.5rem; /* 40px */
+    --space__4xl: 3rem; /* 48px */
+    --space__5xl: 4rem; /* 64px */
+
+    /* Font family */
+    --font-family__primary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-family__decorative: "Proto Grotesk", sans-serif;
+
+    /* Font sizes */
+    --font-size__xs: 0.625rem; /* 10px */
+    --font-size__sm: 0.75rem; /* 12px */
+    --font-size__md: 0.875rem; /* 14px */
+    --font-size__lg: 1rem; /* 16px */
+    --font-size__xl: 1.25rem; /* 20px */
+    --font-size__2xl: 1.5rem; /* 24px */
+    --font-size__3xl: 2rem; /* 32px */
+
+    /* line-heights */
+    --line-height__none: 1;
+    --line-height__3xs: 0.75rem; /* 12px */
+    --line-height__2xs: 0.875rem; /* 14px */
+    --line-height__xs: 1.125rem; /* 18px */
+    --line-height__sm: 1.25rem; /* 20px */
+    --line-height__md: 1.375rem; /* 22px */
+    --line-height__lg: 1.5rem; /* 24px */
+    --line-height__xl: 1.75rem; /* 28px */
+    --line-height__2xl: 2rem; /* 32px */
+    --line-height__3xl: 2.25rem; /* 36px */
+
+    /* Font weights */
+    --font-weight__light: 300;
+    --font-weight__regular: 400;
+    --font-weight__medium: 500;
+    --font-weight__bold: 700;
+
+    /* Border radii */
+    --border-radius__xs: 0.1875rem; /* 3px  */
+    --border-radius__sm: 0.25rem; /* 4px  */
+    --border-radius__md: 0.375rem; /* 6px  */
+    --border-radius__lg: 0.5rem; /* 8px  */
+    --border-radius__xl: 0.75rem; /* 12px */
+    --border-radius__2xl: 1rem; /* 16px */ /** in Figma 16px is XL */
+    --border-radius__full: 9999rem;
+
+    /* Breakpoints */
+    --breakpoint__xs: 20rem;
+    --breakpoint__sm: 34rem;
+    --breakpoint__md: 48rem;
+    --breakpoint__lg: 63.25rem;
+    --breakpoint__xl: 80rem;
+    --breakpoint__2xl: 87.5rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "@unocss-box-component/tsconfig/tsconfig.composite.json",
+  "compilerOptions": {
+    "rootDir": "./src/component"
+  },
+  "references": [
+    {
+      "path": "./tsconfig.shared.json"
+    }
+  ]
+}

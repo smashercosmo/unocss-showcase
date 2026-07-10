@@ -1,0 +1,9 @@
+{
+  "extends": "@unocss-box-component/tsconfig/tsconfig.base.json",
+  "include": ["./**/*.stories.*"],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "unocss-box-component-vite-plugin",
+  "type": "module",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smashercosmo/unocss-box-component.git",
+    "directory": "packages/unocss-box-component-vite-plugin"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "@unocss/preset-mini": ">=66.0.0",
+    "postcss": "^8.5.15",
+    "react-aria": "^3.50.0",
+    "unocss": ">=66.0.0"
+  },
+  "devDependencies": {
+    "@unocss-box-component/tsconfig": "workspace:*",
+    "@unocss-box-component/tsdown": "workspace:*",
+    "vite": "catalog:dev"
+  },
+  "peerDependencies": {
+    "@types/react": ">=19",
+    "@types/react-dom": ">=19",
+    "react": ">=19",
+    "react-dom": ">=19",
+    "vite": ">=8"
+  },
+  "exports": {
+    "./component": "./dist/component/component.js",
+    "./plugin": "./dist/plugin/plugin.js",
+    "./shared": "./dist/shared/shared.js",
+    "./*": "./*"
+  }
+}
